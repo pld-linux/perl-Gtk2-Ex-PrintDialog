@@ -1,0 +1,56 @@
+#
+# Conditional build:
+%bcond_with	tests	# perform "make test" (needs DISPLAY)
+#
+%include	/usr/lib/rpm/macros.perl
+%define		pdir	Gtk2
+%define		pnam	Ex-PrintDialog
+Summary:	A simple, pure Perl dialog for printing PostScript data in GTK+ applications
+Name:		perl-%{pdir}-%{pnam}
+Version:	0.02
+Release:	0.1
+License:	same as Perl itself	
+Group:		Development/Languages/Perl
+Source0:	http://www.cpan.org/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
+# Source0-md5:	dc6749cbffb8b79450985419eac03928
+BuildRequires:	perl-devel >= 1:5.8.0
+BuildRequires:	rpm-perlprov >= 4.1-13
+%if %{with tests}
+%endif
+BuildArch:	noarch
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_noautoreq	'perl(anything_fake_or_conditional)'
+
+%description
+A simple, pure Perl dialog for printing PostScript data in GTK+
+applications.
+
+%prep
+%setup -q -n %{pdir}-%{pnam}-%{version}
+
+%build
+%{__perl} Makefile.PL \
+	INSTALLDIRS=vendor
+
+%{__make}
+
+%{?with_tests:%{__make} test}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+
+%{__make} pure_install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(644,root,root,755)
+%doc README
+%{perl_vendorlib}/Gtk2/Ex/PrintDialog.pm
+%{perl_vendorlib}/Gtk2/Ex/PrintDialog/Darwin.pm
+%{perl_vendorlib}/Gtk2/Ex/PrintDialog/Linux.pm
+%{perl_vendorlib}/Gtk2/Ex/PrintDialog/Unix.pm
+%{_mandir}/man3/*
