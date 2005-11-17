@@ -6,25 +6,27 @@
 %define		pdir	Gtk2
 %define		pnam	Ex-PrintDialog
 Summary:	A simple, pure Perl dialog for printing PostScript data in GTK+ applications
+Summary(pl):	Proste, czysto perlowe okno dialogowe do drukowania PostScriptu z aplikacji GTK+
 Name:		perl-%{pdir}-%{pnam}
 Version:	0.02
 Release:	0.1
-License:	same as Perl itself	
+# same as perl
+License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
 # Source0-md5:	dc6749cbffb8b79450985419eac03928
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
-%if %{with tests}
-%endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_noautoreq	'perl(anything_fake_or_conditional)'
 
 %description
 A simple, pure Perl dialog for printing PostScript data in GTK+
 applications.
+
+%description -l pl
+Proste, czysto perlowe okno dialogowe do drukowania PostScriptu z
+poziomu aplikacji GTK+.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
@@ -50,6 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README
 %{perl_vendorlib}/Gtk2/Ex/PrintDialog.pm
+%dir %{perl_vendorlib}/Gtk2/Ex/PrintDialog
 %{perl_vendorlib}/Gtk2/Ex/PrintDialog/Darwin.pm
 %{perl_vendorlib}/Gtk2/Ex/PrintDialog/Linux.pm
 %{perl_vendorlib}/Gtk2/Ex/PrintDialog/Unix.pm
