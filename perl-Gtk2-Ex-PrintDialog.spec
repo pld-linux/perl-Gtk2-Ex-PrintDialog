@@ -6,7 +6,7 @@
 %define		pdir	Gtk2
 %define		pnam	Ex-PrintDialog
 Summary:	A simple, pure Perl dialog for printing PostScript data in GTK+ applications
-Summary(pl.UTF-8):   Proste, czysto perlowe okno dialogowe do drukowania PostScriptu z aplikacji GTK+
+Summary(pl.UTF-8):	Proste, czysto perlowe okno dialogowe do drukowania PostScriptu z aplikacji GTK+
 Name:		perl-%{pdir}-%{pnam}
 Version:	0.02
 Release:	1
