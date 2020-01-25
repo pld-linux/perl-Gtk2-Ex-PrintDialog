@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_with	tests	# perform "make test" (needs DISPLAY)
 #
-%include	/usr/lib/rpm/macros.perl
 %define		pdir	Gtk2
 %define		pnam	Ex-PrintDialog
 Summary:	A simple, pure Perl dialog for printing PostScript data in GTK+ applications
